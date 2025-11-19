@@ -1,18 +1,18 @@
 #!/bin/bash
 
-# Criar pasta caso não exista
 mkdir -p $PREFIX/share/mytermuxlib
 
-# Copiar arquivos
+# Copiar o script da raiz
+cp meu_script.sh $PREFIX/share/mytermuxlib/
+
+# Se tiver outros arquivos na lib, copia também
 cp -r lib/* $PREFIX/share/mytermuxlib/
 
-# Tornar executável
 chmod +x $PREFIX/share/mytermuxlib/*
 
-# Criar comando global
 cat <<EOF > $PREFIX/bin/minhalib
 #!/bin/bash
-bash $PREFIX/share/mytermuxlib/meu_script.sh "$@"
+bash $PREFIX/share/mytermuxlib/meu_script.sh "\$@"
 EOF
 
 chmod +x $PREFIX/bin/minhalib
